@@ -18,8 +18,7 @@ export const load: (Extract<typeof hooks, { load: any }>)['load'] = async (speci
       source: outputText,
     }
   }
-  const result = await load(specifier, ctx, load)
-  return result
+  return load(specifier, ctx, load)
 }
 
 export const resolve: typeof hooks['resolve'] = async (specifier, ctx, resolve) => {

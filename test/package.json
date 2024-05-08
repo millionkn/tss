@@ -1,0 +1,13 @@
+{
+  "name": "@millionkn/tss-test",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "module": "./dist/index.js",
+  "scripts": {
+    "start": "tss run --watch --inspect ./src/test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

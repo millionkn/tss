@@ -1,4 +1,4 @@
-import createCAC from 'cac'
+import { cac as createCAC } from 'cac'
 import { appendRun } from './command/run.js'
 import { appendBuild } from './command/build.js'
 import { exit } from 'process'

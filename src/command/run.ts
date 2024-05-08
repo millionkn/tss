@@ -3,8 +3,6 @@ import { existsSync } from 'fs'
 import { config } from 'dotenv'
 import { execSync } from 'child_process'
 import { env } from 'process'
-import { resolve } from 'path'
-import { pathToFileURL } from "url";
 
 export function appendRun(cac: CAC) {
   cac
@@ -26,7 +24,7 @@ export function appendRun(cac: CAC) {
         `node`,
         `${!options.watch ? '' : '--watch'}`,
         `${!options.inspect ? '' : '--inspect'}`,
-        `--import ${pathToFileURL(resolve(import.meta.dirname, '../register.js')).href}`,
+        `--import ${new URL('../register.js', import.meta.url).href}`,
         target,
       ].filter((e) => !!e).join(' '), {
         stdio: 'inherit',
