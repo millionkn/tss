@@ -4,15 +4,22 @@ import { fileURLToPath, pathToFileURL } from 'url'
 export const load: (Extract<typeof hooks, { load: any }>)['load'] = async (specifier, ctx, load) => {
   if (specifier.endsWith('.ts') || specifier.endsWith('.mts') || specifier.endsWith('.tsx')) {
     const result = await load(specifier, { format: 'module' }, load)
+    const outputText = service.ts.transpileModule(result.source?.toString() ?? '', {
+      fileName: specifier,
+      compilerOptions: {
+        ...service.config.options,
+        sourceMap: false,
+        inlineSourceMap: true,
+        inlineSources: false,
+      },
+    }).outputText
     return {
       ...result,
-      source: service.ts.transpileModule(result.source?.toString() ?? '', {
-        fileName: specifier,
-        compilerOptions: service.config.options,
-      }).outputText
+      source: outputText,
     }
   }
-  return await load(specifier, ctx, load)
+  const result = await load(specifier, ctx, load)
+  return result
 }
 
 export const resolve: typeof hooks['resolve'] = async (specifier, ctx, resolve) => {
