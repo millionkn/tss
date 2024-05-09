@@ -1,20 +1,24 @@
 import ts from 'typescript'
+import { rm } from 'fs'
 
-const configFilePath = ts.findConfigFile('./', ts.sys.fileExists)
+
+
+
+console.log(!!rm)
+
+const configFilePath = ts.findConfigFile('', ts.sys.fileExists, 'tsconfig2.json')
 if (!configFilePath) { throw new Error(`can't find a tsconfig.json`) }
 
-const configFile = ts.readConfigFile(configFilePath, ts.sys.readFile)
-if (configFile.error) {
-  throw new Error(configFile.error.messageText.toString())
-}
 const parsedCommandLine = ts.getParsedCommandLineOfConfigFile(configFilePath, {}, {
   ...ts.sys,
   onUnRecoverableConfigFileDiagnostic: (diagnostic) => {
-    console.log(diagnostic.messageText)
+    throw new Error(diagnostic.messageText.toString())
   }
 })
 if (!parsedCommandLine) { throw new Error() }
-
+if (parsedCommandLine.errors.length !== 0) {
+  throw new Error(parsedCommandLine.errors.map((e) => e.messageText.toString()).join('\n\n'))
+}
 const program = ts.createProgram({
   options: parsedCommandLine.options,
   rootNames: parsedCommandLine.fileNames,

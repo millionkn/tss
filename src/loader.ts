@@ -8,7 +8,6 @@ export const load: (Extract<typeof hooks, { load: any }>)['load'] = async (speci
       fileName: specifier,
       compilerOptions: {
         ...service.config.options,
-        sourceMap: false,
         inlineSourceMap: true,
         inlineSources: false,
       },

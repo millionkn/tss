@@ -5,7 +5,8 @@
   "type": "module",
   "module": "./dist/index.js",
   "scripts": {
-    "start": "tss run --watch --inspect ./src/test.ts"
+    "build": "tss build",
+    "start": "tss run --watch --inspect ./src/test2.ts"
   },
   "keywords": [],
   "author": "",

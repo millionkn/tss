@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -26,6 +26,9 @@ dependencies:
   rollup-plugin-typescript2:
     specifier: ^0.36.0
     version: 0.36.0(rollup@4.17.2)(typescript@5.4.4)
+  source-map-support:
+    specifier: ^0.5.21
+    version: 0.5.21
 
 devDependencies:
   '@types/source-map-support':
@@ -340,6 +343,10 @@ packages:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
     dependencies:
       balanced-match: 1.0.2
+    dev: false
+
+  /buffer-from@1.1.2:
+    resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
     dev: false
 
   /builtin-modules@3.3.0:
@@ -698,10 +705,16 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /source-map-support@0.5.21:
+    resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
+    dependencies:
+      buffer-from: 1.1.2
+      source-map: 0.6.1
+    dev: false
+
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
