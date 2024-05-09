@@ -6,7 +6,7 @@
   "module": "./dist/index.js",
   "scripts": {
     "build": "tss build",
-    "start": "tss run --watch --inspect ./src/test2.ts"
+    "start": "tss run --watch --inspect ./src/index.ts"
   },
   "keywords": [],
   "author": "",

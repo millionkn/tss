@@ -3,7 +3,6 @@ import sms from 'source-map-support'
 import { service } from "./const.js";
 import { fileURLToPath } from "url";
 import { readFileSync } from "fs";
-import { posix, relative } from "path";
 
 export const transpileResultCache: { [path: string]: string } = {}
 

@@ -3,12 +3,14 @@
     "target": "es2017",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "noEmit": true,
+    // "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "alwaysStrict": true,
     "skipLibCheck": true,
-    "rootDir": "src",
+    "rootDir": "./src/",
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "lib": [
@@ -17,6 +19,11 @@
     "types": [
       "node"
     ],
+    "paths": {
+      "@src/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",

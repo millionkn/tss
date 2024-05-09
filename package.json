@@ -1,6 +1,6 @@
 {
   "name": "@millionkn/tss",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "type": "module",
   "module": "./dist/index.js",
@@ -15,8 +15,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.12.11",
     "@types/source-map-support": "^0.5.10",
-    "ts-node": "^10.9.2",
     "typescript": "^5.4.4"
   },
   "files": [
@@ -26,17 +26,14 @@
     "tss": "./dist/index.js"
   },
   "peerDependencies": {
-    "ts-node": "^10.9.2",
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "18",
     "cac": "^6.7.14",
     "dotenv": "^16.4.5",
-    "glob": "^10.3.12",
+    "rimraf": "^5.0.5",
     "rollup": "^4.17.2",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2"
   }
 }
