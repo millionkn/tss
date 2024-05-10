@@ -25,6 +25,6 @@ export const resolve: typeof hooks['resolve'] = async (specifier, ctx, resolve) 
     return hooks.resolve(specifier, ctx, resolve)
   }
   const { resolvedModule } = service.ts.resolveModuleName(specifier, fileURLToPath(new URL(ctx.parentURL)), service.config.options, service.ts.sys)
-  if (!resolvedModule || resolvedModule.isExternalLibraryImport) { return resolve(specifier, ctx, resolve) }
+  if (!resolvedModule || resolvedModule.isExternalLibraryImport || resolvedModule.extension === '.d.ts') { return resolve(specifier, ctx, resolve) }
   return hooks.resolve(pathToFileURL(resolvedModule.resolvedFileName).href, ctx, resolve)
 }
