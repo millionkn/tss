@@ -11,7 +11,9 @@ export function appendBuild(cac: CAC) {
     .action(async () => {
       const configFilePath = ts.findConfigFile('', ts.sys.fileExists, 'tsconfig.json')
       if (!configFilePath) { throw new Error(`can't find a tsconfig.json`) }
-      const parsedCommandLine = ts.getParsedCommandLineOfConfigFile(configFilePath, {}, {
+      const parsedCommandLine = ts.getParsedCommandLineOfConfigFile(configFilePath, {
+        module: ts.ModuleKind.ESNext,
+      }, {
         ...ts.sys,
         onUnRecoverableConfigFileDiagnostic: (diagnostic) => {
           throw new Error(diagnostic.messageText.toString())

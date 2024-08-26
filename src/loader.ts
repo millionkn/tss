@@ -1,3 +1,4 @@
+import ts from "typescript"
 import { hooks, service } from "./const.js"
 import { fileURLToPath, pathToFileURL } from 'url'
 
@@ -8,6 +9,7 @@ export const load: (Extract<typeof hooks, { load: any }>)['load'] = async (speci
       fileName: specifier,
       compilerOptions: {
         ...service.config.options,
+        module: ts.ModuleKind.ESNext,
         inlineSourceMap: true,
         inlineSources: false,
       },

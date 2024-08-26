@@ -3,6 +3,7 @@ import sms from 'source-map-support'
 import { service } from "./const.js";
 import { fileURLToPath } from "url";
 import { readFileSync } from "fs";
+import ts from "typescript";
 
 export const transpileResultCache: { [path: string]: string } = {}
 
@@ -15,6 +16,7 @@ sms.install({
         fileName: path,
         compilerOptions: {
           ...service.config.options,
+          module: ts.ModuleKind.ESNext,
           inlineSourceMap: true,
           inlineSources: false,
         },
