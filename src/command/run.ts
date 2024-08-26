@@ -17,11 +17,12 @@ export function appendRun(cac: CAC) {
     .command('run <target>', `run <target> file with ts-node`)
     .option('--mode [mode]', `will load '.env.[mode]' and '.env.[mode].local',default is 'development'`)
     .option('--watch', `run in watch mode`)
-    .option('--inspect', `run node with '--inspect' flag`)
+    .option('--pass <configStr>', `pass <configStr> to node`)
     .action(async (target: string, options: {
       mode: string | undefined,
       watch: boolean | undefined,
-      inspect: boolean | undefined,
+      pass: string | undefined,
+      '--': string[] | undefined,
     }) => {
       const mode = options.mode || 'development'
       const envFileArr = [`.env`, `.env.local`, `.env.${mode}`, `.env.${mode}.local`]
@@ -32,9 +33,10 @@ export function appendRun(cac: CAC) {
         dispose()
         const child = execaCommand([
           `node`,
-          `${!options.inspect ? '' : '--inspect'}`,
+          options.pass ?? '',
           `--import ${new URL('../register.js', import.meta.url).href}`,
           target,
+          !options["--"] ? '' : `-- ${options["--"].join(' ')}`,
         ].filter((e) => !!e).join(' '), {
           stdio: 'inherit',
           env: {
