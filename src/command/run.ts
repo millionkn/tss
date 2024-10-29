@@ -17,11 +17,13 @@ export function appendRun(cac: CAC) {
     .command('run <target>', `run <target> file with ts-node`)
     .option('--mode [mode]', `will load '.env.[mode]' and '.env.[mode].local',default is 'development'`)
     .option('--watch', `run in watch mode`)
-    .option('--pass <configStr>', `pass <configStr> to node`)
+    .option('--pass <str>', `pass <str> to node`, {
+      type: [],
+    })
     .action(async (target: string, options: {
       mode: string | undefined,
       watch: boolean | undefined,
-      pass: string | undefined,
+      pass: string[] | undefined,
       '--': string[] | undefined,
     }) => {
       const mode = options.mode || 'development'
@@ -29,11 +31,11 @@ export function appendRun(cac: CAC) {
       const emitter = new EventEmitter({})
       let dispose = () => { }
       emitter.on('start', () => {
-        console.log(format(`starting app...`, false))
+        console.log(format(`starting progrem...`, false))
         dispose()
         const child = execaCommand([
           `node`,
-          options.pass ?? '',
+          options.pass?.join(' ') ?? '',
           `--import ${new URL('../register.js', import.meta.url).href}`,
           target,
           !options["--"] ? '' : `-- ${options["--"].join(' ')}`,
@@ -58,7 +60,6 @@ export function appendRun(cac: CAC) {
         const timeoutId = setTimeout(() => emitter.emit('start'), 400)
         dispose = () => clearTimeout(timeoutId)
       })
-      console.log(format(`dev server is started`))
       if (options.watch) {
         const envFileWatcher = globWatch(envFileArr)
         envFileWatcher.on(`change`, (fileName) => {
@@ -78,6 +79,7 @@ export function appendRun(cac: CAC) {
           console.log(format(`file ${colors.gray(fileName)} change,restart...`))
           emitter.emit('restart')
         })
+        console.log(format(`watcher started`))
       }
     })
 }

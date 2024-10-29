@@ -47,7 +47,7 @@ export function appendBuild(cac: CAC) {
         input: Object.fromEntries(program.getRootFileNames()
           .filter((str) => !str.endsWith('.d.ts'))
           .map((path) => {
-            const outputName = posix.relative(srcPath.pathname, pathToFileURL(path).pathname)
+            const outputName = posix.relative(decodeURIComponent(srcPath.pathname), decodeURIComponent(pathToFileURL(path).pathname))
               .replace(/.ts$/, '')
               .replace(/.tsx$/, '')
               .replace(/.msx$/, '')
@@ -63,8 +63,8 @@ export function appendBuild(cac: CAC) {
               const { resolvedModule } = ts.resolveModuleName(id, importer, parsedCommandLine.options, ts.sys)
               if (resolvedModule && !resolvedModule.isExternalLibraryImport) {
                 const resultId = posix.relative(
-                  new URL('.', pathToFileURL(importer)).pathname,
-                  new URL(pathToFileURL(resolvedModule.resolvedFileName)).pathname,
+                  decodeURIComponent(new URL('.', pathToFileURL(importer)).pathname),
+                  decodeURIComponent(new URL(pathToFileURL(resolvedModule.resolvedFileName)).pathname),
                 ).replace(new RegExp(`${resolvedModule.extension.replaceAll('.', '\\.')}$`), '.js')
                 return {
                   external: true,
@@ -79,7 +79,7 @@ export function appendBuild(cac: CAC) {
               })
               return transplieOutput.outputText
             }
-          }
+          },
         ]
       })
       await build.write({
