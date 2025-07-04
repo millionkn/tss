@@ -5,8 +5,8 @@ import { test3 } from '@src/test3'
 
 
 console.log(
-  !!test2,
-  !!test3,
-  !!ts,
-  !!rollup,
+	!!test2,
+	!!test3,
+	!!ts,
+	!!rollup,
 )

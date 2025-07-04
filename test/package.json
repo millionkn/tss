@@ -1,14 +1,14 @@
 {
-  "name": "@millionkn/tss-test",
-  "version": "0.0.1",
-  "description": "",
-  "type": "module",
-  "module": "./dist/index.js",
-  "scripts": {
-    "build": "tss build",
-    "start": "tss run --watch --inspect ./src/index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"name": "@millionkn/tss-test",
+	"version": "0.0.1",
+	"description": "",
+	"type": "module",
+	"module": "./dist/index.js",
+	"scripts": {
+		"build": "tss build",
+		"start": "tss run --watch --inspect ./src/index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
