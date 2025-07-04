@@ -2,7 +2,7 @@ import { CAC } from "cac";
 import { existsSync } from 'fs'
 import { config } from 'dotenv'
 import { execaCommand } from 'execa'
-import { env } from 'process'
+import { env, exit } from 'process'
 import globWatch from 'glob-watcher'
 import EventEmitter from "events";
 
@@ -51,6 +51,7 @@ export function appendRun(cac: CAC) {
 				})
 				child.catch(() => { }).finally(() => {
 					console.log(format(`progrem has exit with code ${child.exitCode}`, false))
+					if (!options.watch) { exit(child.exitCode) }
 				})
 				dispose = () => { child.kill() }
 			})
